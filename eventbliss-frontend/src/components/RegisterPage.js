@@ -14,7 +14,7 @@ export default function RegisterPage(){
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("https://eventbliss.onrender.com/api/auth/register", { username: name, email, password });
+      const res = await axios.post("https://eventbliss-1.onrender.com/api/auth/register", { username: name, email, password });
       
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
