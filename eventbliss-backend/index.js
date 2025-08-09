@@ -6,6 +6,8 @@ const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/eventRoutes");
 const userRoutes = require("./routes/userRoutes"); // New import
 const app = express();
+app.use(cors()); // <-- Add this line to enable CORS
+
 
 app.use(express.json());
 app.use(cors({
