@@ -8,18 +8,23 @@ export default function CreateEvent() {
     date: "",
     location: "",
     description: "",
-    image: ""
+    image: "",
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    if (e.target.name === "date") {
+      const formattedDate = new Date(e.target.value).toISOString();
+      setFormData({
+        ...formData,
+        date: formattedDate,
+      });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files && e.target.files.length > 0 ? e.target.files[0] : null;
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -50,25 +55,27 @@ export default function CreateEvent() {
   const inputStyle = {
     padding: "10px",
     borderRadius: "8px",
-    border: "none",
+    border: "1px solid #444",
     outline: "none",
     fontSize: "1rem",
-    background: "rgba(255, 255, 255, 0.8)",
+    background: "#333",
+    color: "#eee",
     width: "100%",
   };
 
   const fileInputStyle = {
     padding: "10px",
-    background: "rgba(255, 255, 255, 0.8)",
+    background: "#333",
+    color: "#eee",
     borderRadius: "8px",
-    border: "none",
+    border: "1px solid #444",
     outline: "none",
     fontSize: "1rem",
     width: "100%",
   };
 
   const labelStyle = {
-    color: "white",
+    color: "#eee",
     fontSize: "1rem",
     marginBottom: "5px",
     marginTop: "10px",
@@ -82,17 +89,27 @@ export default function CreateEvent() {
 
   return (
     <Layout>
-      <div style={{
-        maxWidth: "600px",
-        margin: "auto",
-        padding: "2rem",
-        backgroundColor: "rgba(255,255,255,0.1)",
-        backdropFilter: "blur(6px)",
-        borderRadius: "16px",
-        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
-        color: "white"
-      }}>
-        <h2 style={{ marginBottom: "1.5rem", fontSize: "2rem", textAlign: "center" }}>Create a New Event</h2>
+      <div
+        style={{
+          maxWidth: "600px",
+          margin: "auto",
+          padding: "2rem",
+          backgroundColor: "rgba(0,0,0,0.8)",
+          borderRadius: "16px",
+          boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+          color: "white",
+        }}
+      >
+        <h2
+          style={{
+            marginBottom: "1.5rem",
+            fontSize: "2rem",
+            textAlign: "center",
+            color: "#eee",
+          }}
+        >
+          Create a New Event
+        </h2>
         <form onSubmit={handleSubmit} style={{ display: "grid", gap: "15px" }}>
           <div style={formGroupStyle}>
             <label style={labelStyle}>Event Title</label>
@@ -111,7 +128,7 @@ export default function CreateEvent() {
             <input
               type="date"
               name="date"
-              value={formData.date}
+              value={formData.date ? formData.date.split("T")[0] : ""}
               onChange={handleChange}
               required
               style={inputStyle}
@@ -153,13 +170,17 @@ export default function CreateEvent() {
           </div>
           {formData.image && (
             <div style={{ textAlign: "center", marginTop: "10px" }}>
-              <img src={formData.image} alt="Preview" style={{ maxWidth: "100%", maxHeight: "200px", borderRadius: "8px" }} />
+              <img
+                src={formData.image}
+                alt="Preview"
+                style={{ maxWidth: "100%", maxHeight: "200px", borderRadius: "8px" }}
+              />
             </div>
           )}
           <button
             type="submit"
             style={{
-              background: "white",
+              background: "#eee",
               color: "#4f46e5",
               padding: "12px",
               borderRadius: "30px",
@@ -170,8 +191,8 @@ export default function CreateEvent() {
               transition: "0.3s",
               marginTop: "15px",
             }}
-            onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
-            onMouseOut={(e) => e.target.style.transform = "scale(1)"}
+            onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
+            onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
           >
             Create Event
           </button>
