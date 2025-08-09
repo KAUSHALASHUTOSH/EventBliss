@@ -20,7 +20,7 @@ export default function UserManagementPage() {
           return;
         }
         
-        const res = await axios.get("https://eventbliss.onrender.com/api/users", {
+        const res = await axios.get("https://eventbliss-1.onrender.com/api/users", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setUsers(res.data);
