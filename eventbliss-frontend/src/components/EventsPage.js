@@ -8,8 +8,8 @@ export default function EventsPage() {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    // Fetch events
-    axios.get("https://eventbliss-1.onrender.com/api/events")
+    // Fetch events from the local backend
+    axios.get("http://localhost:5000/api/events")
       .then(res => setEvents(res.data))
       .catch(err => console.error("Error fetching events:", err));
 
@@ -85,12 +85,13 @@ export default function EventsPage() {
       padding: "20px"
     },
     card: {
-      background: "white",
+      background: "#2a2d34",
       borderRadius: "10px",
       boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
       padding: "15px",
       transition: "transform 0.2s ease",
-      cursor: "pointer"
+      cursor: "pointer",
+      color: "white"
     },
     img: {
       width: "100%",
@@ -143,6 +144,9 @@ export default function EventsPage() {
       maxWidth: "90%",
       maxHeight: "90%",
       borderRadius: "8px"
+    },
+    text: {
+      color: "white"
     }
   };
 
@@ -162,9 +166,12 @@ export default function EventsPage() {
               style={styles.img}
               onClick={() => setSelectedImage(ev.image)}
             />
-            <h3>{ev.title}</h3>
-            <p>{ev.description}</p>
-  
+            <h3 style={styles.text}>{ev.title}</h3>
+            <p style={styles.text}>{ev.description}</p>
+            {/* The line below is where the date formatting fix is applied */}
+            <p style={styles.text}>{new Date(ev.date).toLocaleDateString()}</p>
+            <p style={styles.text}>{ev.location}</p>
+            
             {(userRole === "owner" || userRole === "admin") && (
               <div>
                 <button style={styles.btnDelete} onClick={() => handleDelete(ev._id)}>
@@ -180,7 +187,7 @@ export default function EventsPage() {
             )}
           </div>
         ))}
-  
+
         {selectedImage && (
           <div style={styles.modal} onClick={() => setSelectedImage(null)}>
             <img src={selectedImage} alt="Full view" style={styles.modalImg} />
