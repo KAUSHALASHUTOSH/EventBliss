@@ -9,7 +9,7 @@ export default function EventsPage() {
 
   useEffect(() => {
     // Fetch events
-    axios.get("http://localhost:5000/api/events")
+    axios.get("https://eventbliss.onrender.com/api/events")
       .then(res => setEvents(res.data))
       .catch(err => console.error("Error fetching events:", err));
 
