@@ -11,7 +11,7 @@ app.use(cors()); // <-- Add this line to enable CORS
 
 app.use(express.json());
 const corsOptions = {
-    origin: 'https://eventbliss-1.onrender.com',
+    origin: 'https://eventbliss.onrender.com',
     optionsSuccessStatus: 200 // For legacy browser support
 };
 
