@@ -32,7 +32,7 @@ export default function CreateEvent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/events", formData);
+      await axios.post("https://eventbliss.onrender.com/api/events", formData);
       alert("Event created successfully!");
       setFormData({
         title: "",
