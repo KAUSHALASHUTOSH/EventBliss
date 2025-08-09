@@ -29,7 +29,7 @@ export default function EventsPage() {
     if (!window.confirm("Are you sure you want to delete this event?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/events/${id}`);
+      await axios.delete(`https://eventbliss-1.onrender.com/api/events/${id}`);
       setEvents(events.filter((e) => e._id !== id));
     } catch (err) {
       console.error("Delete failed", err);
@@ -47,7 +47,7 @@ export default function EventsPage() {
 
     axios
       .put(
-        `http://localhost:5000/api/events/${eventData._id}`,
+        `https://eventbliss-1.onrender.com/api/events/${eventData._id}`,
         { title: newTitle, description: newDescription, location: newLocation, date: newDate }
       )
       .then((res) => {
@@ -65,7 +65,7 @@ export default function EventsPage() {
 
     axios
       .put(
-        `http://localhost:5000/api/events/${eventData._id}`,
+        `https://eventbliss-1.onrender.com/api/events/${eventData._id}`,
         { image: newImage },
       )
       .then((res) => {
