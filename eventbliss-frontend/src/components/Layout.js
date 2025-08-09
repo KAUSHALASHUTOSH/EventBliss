@@ -45,7 +45,7 @@ export default function Layout({ children }) {
       <script src="https://cdn.tailwindcss.com"></script>
       <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 transition-all duration-300 ${scrolled ? 'bg-gray-800 shadow-lg' : 'bg-transparent'}`}>
         <div className="text-xl font-extrabold tracking-wider">
-          <Link to="/" className="text-white no-underline">🎉 EventBliss</Link>
+          <Link to="/" className="text-white no-underline">EventBliss</Link>
         </div>
 
         <nav className="flex items-center space-x-4">
