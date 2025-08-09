@@ -21,7 +21,7 @@ export default function AboutPage() {
     setLoading(true);
     setStatus("");
     try {
-      await axios.post("https://eventbliss.onrender.com/api/contact", formData);
+      await axios.post("https://eventbliss1.onrender.com/api/contact", formData);
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
